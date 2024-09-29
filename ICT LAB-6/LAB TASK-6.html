@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Simple font for better readability */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+        }
+
+        form {
+            padding: 20px;
+            border: 1px solid white; /* Light border for form */
+            border-radius: 5px; /* Rounded corners */
+            background-color: white; 
+        }
+
+        input, textarea {
+            width: 100%; 
+            margin-bottom: 10px;
+            padding: 10px; 
+        }
+
+        button {
+            background-color: blue; 
+            color: white; 
+            border: none;
+            padding: 10px; 
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h2>Feedback</h2>
+        
+        <label>Your Name:</label><br>
+        <input type="text" placeholder="Enter your name" required><br>
+        
+        <label>Your Email:</label><br>
+        <input type="email" placeholder="Enter your email" required><br>
+        
+        <label>Rating:</label><br>
+        <input type="radio" name="rating" value="1" required> 1
+        <input type="radio" name="rating" value="2"> 2
+        <input type="radio" name="rating" value="3"> 3
+        <input type="radio" name="rating" value="4"> 4
+        <input type="radio" name="rating" value="5"> 5<br>
+        
+        <label>Your Feedback:</label><br>
+        <textarea rows="4" placeholder="Tell us about your experience..." required></textarea><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
