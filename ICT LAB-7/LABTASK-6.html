@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Heading Color</title>
+</head>
+<body>
+
+<h2 id="Heading">Change My Color!</h2>
+
+<button onclick="changeColor()">Change Color</button>
+
+<script>
+    function changeColor() {
+        const colors = ["blue", "red", "green", "purple", "orange", "pink", "yellow"];
+        let heading = document.getElementById("Heading");
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        heading.style.color = randomColor;
+    }
+</script>
+
+</body>
+</html>
