@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuest - Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+        }
+
+        header .site-title {
+            font-size: 2rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        header nav {
+            float: right;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* New Post Section */
+        .new-post-section {
+            background-color: white;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-field, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Blog Section */
+        .blog-posts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .blog-post {
+            background-color: white;
+            padding: 20px;
+            width: 30%;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-post h3 {
+            font-size: 1.5rem;
+            color: #007bff;
+        }
+
+        /* Modal for Full Post */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .close {
+            font-size: 2rem;
+            color: #007bff;
+            cursor: pointer;
+            float: right;
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-content .comments-section {
+            margin-top: 20px;
+        }
+
+        .comment-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .comment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .comment-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .comment-item span {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .cta-button {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .input-field, textarea {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .input-field:focus, textarea:focus {
+            border-color: #007bff;
+        }
+
+        /* Copy Link Section */
+        .copy-link {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .copy-link:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-link-feedback {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="site-title">EduQuest</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="books.html">Books & Materials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- New Post Section -->
+    <section class="new-post-section">
+        <div class="container">
+            <h2>Create New Post</h2>
+            <form id="postForm">
+                <label for="post-title">Post Title:</label>
+                <input type="text" id="post-title" name="title" class="input-field" placeholder="Enter your post title" required>
+
+                <label for="post-content">Content:</label>
+                <textarea id="post-content" name="content" class="input-field" placeholder="Write your post content here" required></textarea>
+
+                <button type="submit" class="cta-button">Submit Post</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Blog Section with Dynamic Posts -->
+    <section>
+        <h2>Blog Posts</h2>
+        <div id="blog-posts-container" class="blog-posts-container">
+            <!-- Dynamic Posts will be inserted here -->
+        </div>
+    </section>
+
+    <!-- Modal for Full Post -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-content"></p>
+            <button id="copy-link-btn" class="copy-link" onclick="copyPostLink()">Copy Post Link</button>
+            <div id="copy-feedback" class="copy-link-feedback"></div>
+            <div class="comments-section">
+                <h3>Comments:</h3>
+                <textarea id="comment-box-modal" class="comment-box" placeholder="Write a comment..."></textarea>
+                <button onclick="addCommentModal()" class="cta-button">Submit Comment</button>
+                <ul id="comment-list-modal" class="comment-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let posts = [
+            {
+                id: 1,
+                title: "Introduction to C Programming",
+                content: "C programming is one of the most powerful languages for system-level programming. It allows manipulation of hardware, memory, and data structures with high performance. In this post, we will explore the basics of C programming language.",
+                comments: []
+            },
+            {
+                id: 2,
+                title: "Understanding Pointers in C",
+                content: "Pointers in C programming can be a little tricky to understand, but they provide powerful ways to manage memory. They are used for dynamic memory allocation, passing by reference, and more.",
+                comments: []
+            },
+            {
+                id: 3,
+                title: "C Language: Functions and Recursion",
+                content: "Functions are one of the most fundamental building blocks in C programming. Recursion, in particular, allows functions to call themselves, enabling powerful solutions to problems.",
+                comments: []
+            }
+        ];
+
+        // Function to dynamically add posts
+        function renderPosts() {
+            const postsContainer = document.getElementById('blog-posts-container');
+            postsContainer.innerHTML = '';  // Clear the container before adding new posts
+
+            posts.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('blog-post');
+                postDiv.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <p>${post.content.substring(0, 100)}...</p>
+                    <button class="cta-button" onclick="openModal('${post.title}', '${post.content}', ${post.id})">Read More</button>
+                `;
+                postsContainer.appendChild(postDiv);
+            });
+        }
+
+        // Handle new post submission
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            const newPost = {
+                id: posts.length + 1,
+                title: title,
+                content: content,
+                comments: []
+            };
+            posts.push(newPost);
+            renderPosts();  // Re-render posts after adding a new one
+            e.target.reset();  // Clear the form
+        });
+
+        // Open modal to view post details
+        function openModal(title, content, postId) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-content').innerText = content;
+            document.getElementById('modal').style.display = 'flex';  // Show the modal
+            currentPostId = postId;
+            loadComments(postId);
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';  // Hide the modal
+        }
+
+        let currentPostId = null;
+
+        // Add comment to a post
+        function addCommentModal() {
+            const commentText = document.getElementById('comment-box-modal').value;
+            if (commentText) {
+                const commentTime = new Date().toLocaleString();
+                const newComment = {
+                    text: commentText,
+                    time: commentTime
+                };
+                posts[currentPostId - 1].comments.push(newComment);
+                document.getElementById('comment-box-modal').value = '';
+                loadComments(currentPostId);
+            }
+        }
+
+        // Load comments for the modal
+        function loadComments(postId) {
+            const commentList = document.getElementById('comment-list-modal');
+            commentList.innerHTML = '';
+            posts[postId - 1].comments.forEach(comment => {
+                const commentItem = document.createElement('li');
+                commentItem.className = 'comment-item';
+                commentItem.innerHTML = `<p>${comment.text}</p><span>Posted on ${comment.time}</span>`;
+                commentList.appendChild(commentItem);
+            });
+        }
+
+        // Copy the post link to clipboard
+        function copyPostLink() {
+            const link = window.location.href + '?postId=' + currentPostId;
+            navigator.clipboard.writeText(link)
+                .then(() => {
+                    document.getElementById('copy-feedback').innerText = 'Post link copied!';
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+
+        // Initially render posts
+        renderPosts();
+    </script>
+
+</body>
+</html>
